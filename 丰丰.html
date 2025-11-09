@@ -34,7 +34,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
@@ -59,7 +59,7 @@
         
         .main-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
@@ -154,7 +154,7 @@
         
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -176,6 +176,67 @@
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 10px;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+            padding-left: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(143, 148, 251, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
         }
         
         footer {
@@ -220,16 +281,17 @@
         <header>
             <h1>丰丰侠的个人空间</h1>
             <p>探索我的世界，分享我的热爱</p>
+            <p>创建于2025年11月9日</p>
         </header>
         
         <div class="main-content">
-            <!-- 作者简介卡片 -->
+            <!-- 关于我卡片 -->
             <div class="card">
                 <div class="card-icon">
                     <i class="fas fa-user"></i>
                 </div>
                 <h2>关于我</h2>
-                <p>我来自中国重庆，在积极提升自己</p>
+                <p>大家好，我是丰丰侠（英文名：harvest chivalrous），我来自中国重庆，正在积极提升自己，欢迎世界各地的小伙伴和我一起交流学习。</p>
                 <p>我享受学习新技能的过程，特别是编程和音乐，它们让我感到充实和快乐。</p>
                 <div class="skills">
                     <span class="skill-tag">Python</span>
@@ -237,8 +299,8 @@
                     <span class="skill-tag">唱歌</span>
                     <span class="skill-tag">游戏</span>
                     <span class="skill-tag">学习能力</span>
-                    <span class="skill-tag">建筑行业</span>
-                    <span class="skill-tag">极限运动</span>
+                    <span class="skill-tag">建筑学</span>
+                    <span class="skill-tag">健身爱好者</span>
                 </div>
                 <a href="#" class="btn">了解更多</a>
             </div>
@@ -276,14 +338,14 @@
                     </div>
                     <div>
                         <h3>电脑游戏</h3>
-                        <p>喜欢高度开放世界类型的游戏，末日丧尸题材是我的最爱</p>
+                        <p>喜欢高度开放世界类型的游戏，未日丧尸题材是我的最爱</p>
                     </div>
                 </div>
                 
                 <a href="#" class="btn">分享我的作品</a>
             </div>
             
-            <!-- 技能展示卡片 -->
+            <!-- 技能与目标卡片 -->
             <div class="card">
                 <div class="card-icon">
                     <i class="fas fa-chart-line"></i>
@@ -314,7 +376,7 @@
                 <a href="#" class="btn">查看我的计划</a>
             </div>
             
-            <!-- 分享区域卡片 -->
+            <!-- 分享与交流卡片 -->
             <div class="card">
                 <div class="card-icon">
                     <i class="fas fa-share-alt"></i>
@@ -354,6 +416,94 @@
                 
                 <a href="#" class="btn">联系我</a>
             </div>
+            
+            <!-- 新增：我的项目展示卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h2>我的项目</h2>
+                <p>以下是我正在开发或已完成的项目，展示我的技术实践能力：</p>
+                
+                <div class="hobby-item">
+                    <div class="hobby-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h3>个人网站</h3>
+                        <p>使用HTML/CSS/JavaScript创建的响应式网站</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item">
+                    <div class="hobby-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3>Python自动化工具</h3>
+                        <p>开发提高工作效率的Python脚本</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item">
+                    <div class="hobby-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div>
+                        <h3>数据分析项目</h3>
+                        <p>使用Python进行数据收集与分析</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item">
+                    <div class="hobby-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3>移动端适配</h3>
+                        <p>优化网站以适应各种设备屏幕</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn">查看项目详情</a>
+            </div>
+            
+            <!-- 新增：学习成长记录卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2>学习成长</h2>
+                <p>记录我的学习历程和技术成长轨迹：</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年11月</div>
+                        <h3>掌握网站部署</h3>
+                        <p>成功学习并实践GitHub Pages网站部署</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年10月</div>
+                        <h3>Python进阶学习</h3>
+                        <p>深入学习Django框架和Web开发</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年9月</div>
+                        <h3>HTML/CSS精通</h3>
+                        <p>掌握响应式网页设计和现代CSS技术</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年8月</div>
+                        <h3>Python基础</h3>
+                        <p>完成Python编程基础学习</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn">查看完整记录</a>
+            </div>
         </div>
         
         <footer>
@@ -389,6 +539,19 @@
                     e.preventDefault();
                     alert('功能正在开发中，敬请期待！');
                 });
+            });
+            
+            // 时间线动画
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 300 * index);
             });
         });
     </script>
