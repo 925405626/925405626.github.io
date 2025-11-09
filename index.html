@@ -1,51 +1,1362 @@
-<!DOCTYPE html>
+<head>
+    <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>丰丰侠的第一个网页</title>
+    <title>丰丰侠的个人空间</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff7e5f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: var(--transition);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
             color: white;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
             text-align: center;
         }
-        .success-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
+        
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
         }
-        h1 {
-            font-size: 2.5em;
+        
+        .card p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-tag {
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .skill-tag:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .hobby-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(143, 148, 251, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .hobby-item:hover {
+            background: rgba(143, 148, 251, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .hobby-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .project-card:hover i {
+            color: white;
+        }
+        
+        .project-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary);
+        }
+        
+        .timeline-item {
+            position: relative;
             margin-bottom: 20px;
+            padding-left: 40px;
+            cursor: pointer;
+            transition: var(--transition);
         }
-        p {
-            font-size: 1.2em;
+        
+        .timeline-item:hover {
+            background: rgba(143, 148, 251, 0.1);
+            border-radius: 8px;
+            padding: 10px 10px 10px 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover::before {
+            transform: scale(1.3);
+            background: var(--primary);
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(143, 148, 251, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            background: rgba(143, 148, 251, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 微信二维码样式 */
+        .qrcode-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qrcode-container img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        } 
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .modal-body {
+            color: var(--dark);
             line-height: 1.6;
+        }
+        
+        .modal-body img {
+            max-width: 100%;
+            border-radius: 10px;
             margin: 15px 0;
         }
-        .date {
-            font-size: 1em;
-            opacity: 0.8;
-            margin-top: 30px;
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+        }
+        
+        /* 深色主题 */
+        body.dark-theme {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .card {
+            background: rgba(44, 62, 80, 0.9);
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .card p {
+            color: #bdc3c7;
+        }
+        
+        body.dark-theme .project-card {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+        
+        body.dark-theme .modal-content {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="success-card">
-        <h1>🎉 大家好，我是丰丰侠</h1>
-        <p>我一不小心就开发了属于我自己的网站</p>
-        <p>虽然这个网站暂时性的没有什么内容</p>
-        <p>但是从开始学习Web开发到搭建完整的开发环境花了我4个小时</p>
-        <p>很初步的掌握了Git和GitHub使用，这是我Web开发之旅的起点，下一步将深入Django框架</p>
-        <p class="date">我会逐步在这个网站上增加内容。成就解锁时间：2025年11月8日</p>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <div class="container">
+        <header>
+            <h1>丰丰侠的个人空间</h1>
+            <p>探索我的世界，分享我的热爱</p>
+            <p>创建于2025年11月9日</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- 关于我卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2>关于我</h2>
+                <p>大家好，我是丰丰侠（英文名：harvest chivalrous），我来自中国重庆，正在积极提升自己，欢迎世界各地的小伙伴和我一起交流学习。</p>
+                <p>我享受学习新技能的过程，特别是编程和音乐，它们让我感到充实和快乐。</p>
+                <div class="skills">
+                    <span class="skill-tag" data-skill="Python">Python</span>
+                    <span class="skill-tag" data-skill="Web开发">Web开发</span>
+                    <span class="skill-tag" data-skill="唱歌">唱歌</span>
+                    <span class="skill-tag" data-skill="游戏">游戏</span>
+                    <span class="skill-tag" data-skill="学习能力">学习能力</span>
+                    <span class="skill-tag" data-skill="建筑学">建筑学</span>
+                    <span class="skill-tag" data-skill="健身爱好者">健身爱好者</span>
+                </div>
+                <button class="btn" id="aboutBtn">了解更多</button>
+            </div>
+            
+            <!-- 兴趣爱好卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>我的爱好</h2>
+                
+                <div class="hobby-item" data-hobby="编程">
+                    <div class="hobby-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <h3>Python编程</h3>
+                        <p>热爱用Python解决实际问题，从自动化脚本到Web开发</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-hobby="音乐">
+                    <div class="hobby-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div>
+                        <h3>唱歌</h3>
+                        <p>喜欢各种音乐风格，特别是流行和民谣</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-hobby="游戏">
+                    <div class="hobby-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h3>电脑游戏</h3>
+                        <p>喜欢高度开放世界类型的游戏，末日丧尸题材是我的最爱</p>
+                    </div>
+                </div>
+                
+                <button class="btn" id="hobbyBtn">分享我的作品</button>
+            </div>
+            
+            <!-- 技能与目标卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>技能与目标</h2>
+                <p>我正在系统学习以下技能：</p>
+                
+                <div class="project-grid">
+                    <div class="project-card" data-project="python">
+                        <i class="fab fa-python"></i>
+                        <h3>Python开发</h3>
+                        <p>自动化脚本与Web应用</p>
+                    </div>
+                    
+                    <div class="project-card" data-project="web">
+                        <i class="fas fa-globe"></i>
+                        <h3>网站开发</h3>
+                        <p>前端与后端技术</p>
+                    </div>
+                    
+                    <div class="project-card" data-project="music">
+                        <i class="fas fa-coins"></i>
+                        <h3>自主编曲写词</h3>
+                        <p>做独立音乐人</p>
+                    </div>
+                </div>
+                
+                <button class="btn" id="planBtn">查看我的计划</button>
+            </div>
+            
+            <!-- 分享与交流卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h2>分享与交流</h2>
+                <p>我乐于分享学习经验和生活感悟，也期待与志同道合的朋友交流。</p>
+                
+                <div class="hobby-item" data-share="notes">
+                    <div class="hobby-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div>
+                        <h3>学习笔记</h3>
+                        <p>记录编程学习中的心得与技巧</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-share="projects">
+                    <div class="hobby-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div>
+                        <h3>作品展示</h3>
+                        <p>分享我的编程项目和音乐作品</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-share="experience">
+                    <div class="hobby-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <h3>经验交流</h3>
+                        <p>讨论职业发展和技能提升</p>
+                    </div>
+                </div>
+                
+                <button class="btn" id="contactBtn">联系我</button>
+            </div>
+            
+            <!-- 我的项目展示卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h2>我的项目</h2>
+                <p>以下是我正在开发或已完成的项目，展示我的技术实践能力：</p>
+                
+                <div class="hobby-item" data-project-item="website">
+                    <div class="hobby-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h3>个人网站</h3>
+                        <p>使用HTML/CSS/JavaScript创建的响应式网站</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-project-item="automation">
+                    <div class="hobby-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3>Python自动化工具</h3>
+                        <p>开发提高工作效率的Python脚本</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-project-item="data">
+                    <div class="hobby-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div>
+                        <h3>数据分析项目</h3>
+                        <p>使用Python进行数据收集与分析</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-item" data-project-item="mobile">
+                    <div class="hobby-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h3>移动端适配</h3>
+                        <p>优化网站以适应各种设备屏幕</p>
+                    </div>
+                </div>
+                
+                <button class="btn" id="projectBtn">查看项目详情</button>
+            </div>
+            
+            <!-- 学习成长记录卡片 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2>学习成长</h2>
+                <p>记录我的学习历程和技术成长轨迹：</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item" data-timeline="deploy">
+                        <div class="timeline-date">2025年11月</div>
+                        <h3>掌握网站部署</h3>
+                        <p>成功学习并实践GitHub Pages网站部署</p>
+                    </div>
+                    
+                    <div class="timeline-item" data-timeline="django">
+                        <div class="timeline-date">2025年10月</div>
+                        <h3>Python进阶学习</h3>
+                        <p>深入学习Django框架和Web开发</p>
+                    </div>
+                    
+                    <div class="timeline-item" data-timeline="css">
+                        <div class="timeline-date">2025年9月</div>
+                        <h3>HTML/CSS精通</h3>
+                        <p>掌握响应式网页设计和现代CSS技术</p>
+                    </div>
+                    
+                    <div class="timeline-item" data-timeline="python-basic">
+                        <div class="timeline-date">2025年8月</div>
+                        <h3>Python基础</h3>
+                        <p>完成Python编程基础学习</p>
+                    </div>
+                </div>
+                
+                <button class="btn" id="learningBtn">查看完整记录</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 我的个人空间 | 追求更好的自己</p>
+            <div class="social-links">
+                <a href="#" id="githubLink"><i class="fab fa-github"></i></a>
+                <a href="#" id="wechatLink"><i class="fab fa-weixin"></i></a>
+                <a href="#" id="qqLink"><i class="fab fa-qq"></i></a>
+                <a href="#" id="emailLink"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
     </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2 class="modal-title" id="modalTitle">标题</h2>
+            <div class="modal-body" id="modalBody">
+                内容将在这里显示
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模态框功能
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeModal = document.getElementById('closeModal');
+        
+        // 打开模态框函数
+        function openModal(title, content) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭模态框函数
+        function closeModalFunc() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 关闭模态框事件
+        closeModal.addEventListener('click', closeModalFunc);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+        
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // 关于我按钮
+        document.getElementById('aboutBtn').addEventListener('click', () => {
+            const content = `
+                <h3>我的故事</h3>
+                <p>我是一名来自重庆的普通上班族，有着强烈的学习意愿和实操能力，正在积极提升自己。</p>
+                <p>我享受学习新技能的过程，特别是编程和音乐，它们让我感到充实和快乐。</p>
+                <h3>个人特点</h3>
+                <ul>
+                    <li>学习能力强，能够快速掌握新技能</li>
+                    <li>有很强的实际操作能力，喜欢动手实践</li>
+                    <li>热爱编程，特别是Python和Web开发</li>
+                    <li>喜欢音乐，会唱歌和简单的乐器演奏</li>
+                    <li>对建筑学有浓厚兴趣</li>
+                    <li>坚持健身，保持健康生活方式</li>
+                </ul>
+                <h3>未来规划</h3>
+                <p>我希望通过不断学习和技术提升，实现收入增长，同时能够帮助更多人学习编程和Web开发。</p>
+            `;
+            openModal('关于丰丰侠', content);
+        });
+        
+        // 技能标签点击事件
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const skill = tag.getAttribute('data-skill');
+                let content = '';
+                
+                switch(skill) {
+                    case 'Python':
+                        content = `<p>我已经掌握了Python基础语法，正在学习Django框架进行Web开发。已完成多个小项目，包括数据爬虫、自动化脚本等。</p>`;
+                        break;
+                    case 'Web开发':
+                        content = `<p>熟悉HTML、CSS和JavaScript，能够创建响应式网站。正在学习前端框架如Vue.js和后端技术如Node.js。</p>`;
+                        break;
+                    case '唱歌':
+                        content = `<p>热爱唱歌，擅长流行和民谣风格。平时喜欢在K歌软件上录制歌曲，是QQ音乐的入驻歌手，也尝试自己创作简单的歌词。</p>`;
+                        break;
+                    case '游戏':
+                        content = `<p>喜欢玩开放世界游戏，特别是末日生存类题材。最爱的游戏包括《最后生还者》、《消逝的光芒》等。</p>`;
+                        break;
+                    case '学习能力':
+                        content = `<p>具备快速学习新知识的能力，能够在短时间内掌握新技能。通过自学掌握了编程基础，并持续学习新技术。</p>`;
+                        break;
+                    case '建筑学':
+                        content = `<p>对建筑设计和城市规划有浓厚兴趣，喜欢研究不同建筑风格和空间布局。平时会关注建筑相关的资讯和展览。</p>`;
+                        break;
+                    case '健身爱好者':
+                        content = `<p>坚持每周健身3-4次，注重力量训练和有氧运动结合。相信健康的身体是高效工作和学习的基础。</p>`;
+                        break;
+                }
+                
+                openModal(`${skill} - 详细说明`, content);
+            });
+        });
+        
+        // 兴趣爱好点击事件
+        document.querySelectorAll('.hobby-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const hobby = item.getAttribute('data-hobby');
+                let title = '';
+                let content = '';
+                
+                switch(hobby) {
+                    case '编程':
+                        title = 'Python编程';
+                        content = `
+                            <p>我热爱用Python解决实际问题，从自动化脚本到Web开发。已完成的项目包括：</p>
+                            <ul>
+                                <li>个人网站开发</li>
+                                <li>数据爬虫程序</li>
+                                <li>自动化办公脚本</li>
+                                <li>简单的游戏开发</li>
+                            </ul>
+                            <p>未来计划深入学习Django框架，开发更复杂的Web应用。</p>
+                        `;
+                        break;
+                    case '音乐':
+                        title = '唱歌与音乐';
+                        content = `
+                            <p>音乐是我生活中重要的一部分。我喜欢各种音乐风格，特别是流行和民谣。</p>
+                            <p>平时我会：</p>
+                            <ul>
+                                <li>在K歌软件上录制歌曲</li>
+                                <li>学习简单的吉他弹奏</li>
+                                <li>尝试创作歌词</li>
+                                <li>关注音乐制作和编曲</li>
+                            </ul>
+                            <p>我的目标是能够独立完成一首歌曲的创作和录制。</p>
+                        `;
+                        break;
+                    case '游戏':
+                        title = '电脑游戏';
+                        content = `
+                            <p>我喜欢高度开放世界类型的游戏，末日丧尸题材是我的最爱。</p>
+                            <p>我喜欢的游戏包括：</p>
+                            <ul>
+                                <li>《最后生还者》系列 - 剧情深刻的末日生存游戏</li>
+                                <li>《消逝的光芒》 - 跑酷与丧尸战斗的完美结合</li>
+                                <li>《荒野大镖客2》 - 沉浸式的西部世界体验</li>
+                                <li>《赛博朋克2077》 - 未来科技与黑暗故事的融合</li>
+                            </ul>
+                            <p>游戏不仅是我放松的方式，也激发了我对编程和故事创作的兴趣。</p>
+                        `;
+                        break;
+                }
+                
+                if (title && content) {
+                    openModal(title, content);
+                }
+            });
+        });
+        
+        // 项目卡片点击事件
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const project = card.getAttribute('data-project');
+                let title = '';
+                let content = '';
+                
+                switch(project) {
+                    case 'python':
+                        title = 'Python开发';
+                        content = `
+                            <p>我正在系统学习Python开发，目标是掌握：</p>
+                            <ul>
+                                <li>Web开发框架（Django, Flask）</li>
+                                <li>数据分析和可视化</li>
+                                <li>自动化脚本编写</li>
+                                <li>机器学习基础</li>
+                            </ul>
+                            <p>已完成项目：个人博客系统、数据爬虫、自动化办公工具</p>
+                        `;
+                        break;
+                    case 'web':
+                        title = '网站开发';
+                        content = `
+                            <p>我正在学习全栈Web开发技术：</p>
+                            <ul>
+                                <li>前端：HTML5, CSS3, JavaScript, Vue.js</li>
+                                <li>后端：Node.js, Express, 数据库</li>
+                                <li>部署：GitHub Pages, 云服务器</li>
+                            </ul>
+                            <p>已完成项目：个人作品集网站、响应式企业官网</p>
+                        `;
+                        break;
+                    case 'music':
+                        title = '自主编曲写词';
+                        content = `
+                            <p>我的音乐创作目标：</p>
+                            <ul>
+                                <li>学习基础乐理和编曲软件</li>
+                                <li>尝试创作原创歌词</li>
+                                <li>录制并发布自己的音乐作品</li>
+                                <li>与其他音乐爱好者合作</li>
+                            </ul>
+                            <p>目前正在学习吉他基础和简单的编曲技巧。</p>
+                        `;
+                        break;
+                }
+                
+                openModal(title, content);
+            });
+        });
+        
+        // 其他按钮点击事件
+        document.getElementById('hobbyBtn').addEventListener('click', () => {
+            openModal('我的作品分享', `
+                <p>这里展示我的一些个人作品和项目：</p>
+                <h3>编程项目</h3>
+                <ul>
+                    <li>个人网站 - 使用HTML/CSS/JavaScript开发</li>
+                    <li>Python自动化工具 - 提高工作效率的脚本</li>
+                    <li>数据可视化项目 - 使用Python分析数据并生成图表</li>
+                </ul>
+                <h3>音乐作品</h3>
+                <ul>
+                    <li>原创歌词创作</li>
+                    <li>翻唱歌曲录制</li>
+                    <li>简单的吉他弹奏视频</li>
+                </ul>
+                <p>更多作品正在开发中，敬请期待！</p>
+            `);
+        });
+        
+        document.getElementById('planBtn').addEventListener('click', () => {
+            openModal('我的学习计划', `
+                <h3>短期目标（3-6个月）</h3>
+                <ul>
+                    <li>掌握Django框架，完成一个完整的Web项目</li>
+                    <li>学习前端框架Vue.js</li>
+                    <li>提升JavaScript编程能力</li>
+                    <li>完成至少3个实际项目</li>
+                </ul>
+                
+                <h3>中期目标（1年）</h3>
+                <ul>
+                    <li>成为全栈开发者</li>
+                    <li>建立个人技术博客</li>
+                    <li>尝试接小型外包项目</li>
+                    <li>学习移动应用开发</li>
+                </ul>
+                
+                <h3>长期目标（3年）</h3>
+                <ul>
+                    <li>创造更多的变现能力</li>
+                    <li>建立自己的技术团队</li>
+                    <li>开发有影响力的产品</li>
+                    <li>帮助更多人学习编程</li>
+                </ul>
+            `);
+        });
+        
+        document.getElementById('contactBtn').addEventListener('click', () => {
+            openModal('联系我', `
+                <p>很高兴您想联系我！您可以通过以下方式与我取得联系：</p>
+                
+                <h3>社交媒体</h3>
+                <ul>
+                    <li>GitHub: <a href="https://github.com/fengfengxia" target="_blank">github.com/fengfengxia</a></li>
+                    <li>微信: a925405626
+                    <li>QQ: 925405626</li>
+                    <li>邮箱: 925405626@qq.com</li>
+                </ul>
+                
+                <h3>合作意向</h3>
+                <p>如果您有以下合作意向，欢迎联系我：</p>
+                <ul>
+                    <li>技术交流与学习</li>
+                    <li>项目合作开发</li>
+                    <li>网站建设需求</li>
+                    <li>音乐创作合作</li>
+                </ul>
+                
+                <p>我会尽快回复您的消息！</p>
+            `);
+        });
+        
+        document.getElementById('projectBtn').addEventListener('click', () => {
+            openModal('我的项目详情', `
+                <h3>已完成项目</h3>
+                <ul>
+                    <li><strong>个人网站</strong> - 使用HTML/CSS/JavaScript创建的响应式网站，展示个人作品和技能</li>
+                    <li><strong>Python自动化工具</strong> - 开发提高工作效率的Python脚本，包括文件处理、数据整理等</li>
+                    <li><strong>数据分析项目</strong> - 使用Python进行数据收集与分析，生成可视化报告</li>
+                </ul>
+                
+                <h3>进行中项目</h3>
+                <ul>
+                    <li><strong>移动端适配</strong> - 优化网站以适应各种设备屏幕，提升用户体验</li>
+                    <li><strong>Django博客系统</strong> - 使用Django框架开发完整的博客系统</li>
+                    <li><strong>音乐创作平台</strong> - 计划开发一个音乐人交流和作品展示的平台</li>
+                </ul>
+                
+                <h3>未来计划项目</h3>
+                <ul>
+                    <li>在线学习平台</li>
+                    <li>智能家居控制系统</li>
+                    <li>个人财务管理系统</li>
+                </ul>
+            `);
+        });
+        
+        document.getElementById('learningBtn').addEventListener('click', () => {
+            openModal('完整学习记录', `
+                <h3>2025年学习历程</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年11月</div>
+                        <h4>掌握网站部署</h4>
+                        <p>成功学习并实践GitHub Pages网站部署，将个人作品上线展示。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年10月</div>
+                        <h4>Python进阶学习</h4>
+                        <p>深入学习Django框架和Web开发，开始构建更复杂的Web应用。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年9月</div>
+                        <h4>HTML/CSS精通</h4>
+                        <p>掌握响应式网页设计和现代CSS技术，能够创建美观且功能完善的网站。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年8月</div>
+                        <h4>Python基础</h4>
+                        <p>完成Python编程基础学习，掌握基本语法和常用库的使用。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年7月</div>
+                        <h4>Git版本控制</h4>
+                        <p>学习Git和GitHub使用，掌握代码版本管理和协作开发。</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年6月</div>
+                        <h4>Web开发入门</h4>
+                        <p>开始学习HTML、CSS和JavaScript基础知识，创建第一个网页。</p>
+                    </div>
+                </div>
+                
+                <h3>未来学习计划</h3>
+                <ul>
+                    <li>深入学习JavaScript框架（Vue.js/React）</li>
+                    <li>掌握数据库设计与优化</li>
+                    <li>学习服务器部署与运维</li>
+                    <li>探索人工智能与机器学习</li>
+                </ul>
+            `);
+        });
+        
+        // 社交链接点击事件
+        document.getElementById('githubLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('GitHub', `
+                <p>欢迎访问我的GitHub主页！</p>
+                <p>这里是我存放代码和项目的地方：</p>
+                <ul>
+                    <li>个人网站源代码</li>
+                    <li>Python练习项目</li>
+                    <li>学习笔记和教程</li>
+                    <li>实验性项目</li>
+                </ul>
+                <p>GitHub地址: <a href="https://github.com/fengfengxia" target="_blank">github.com/fengfengxia</a></p>
+            `);
+        });
+        
+        document.getElementById('wechatLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('微信', `
+            <p>扫描下方二维码添加我的微信: </p>
+            <div style="text-align: center;">
+                <div class="qrcode-container">
+                    <img src="images/wechat-qr.jpg" alt="微信二维码" style="width: 200px; height: 200px; border-radius: 10px;">
+                </div>
+            </div>
+            <p>微信号: fengfengxia2025</p>
+            <p>添加时请备注"来自个人网站"</p>
+            `);
+        });
+        
+        document.getElementById('qqLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('QQ', `
+                <p>欢迎通过QQ与我联系！</p>
+                <p>QQ号: 925405626</p>
+                <p>添加时请备注"来自个人网站"</p>
+                <p>我通常会在晚上回复消息，如果未能及时回复，请耐心等待。</p>
+            `);
+        });
+        
+        document.getElementById('emailLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal('邮箱', `
+                <p>欢迎通过邮件与我联系！</p>
+                <p>邮箱地址: 925405626@qq.com</p>
+                <p>我通常会在1-2个工作日内回复邮件。</p>
+                <p>邮件主题建议格式: [咨询类型] - 您的姓名</p>
+                <p>例如: [技术交流] - 张三</p>
+            `);
+        });
+        
+        // 时间线项目点击事件
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const timeline = item.getAttribute('data-timeline');
+                let title = '';
+                let content = '';
+                
+                switch(timeline) {
+                    case 'deploy':
+                        title = '掌握网站部署';
+                        content = `
+                            <p>在2025年11月，我成功学习并实践了GitHub Pages网站部署。</p>
+                            <p>这个过程中我掌握了：</p>
+                            <ul>
+                                <li>Git和GitHub的基本使用</li>
+                                <li>GitHub Pages的配置和部署</li>
+                                <li>自定义域名的设置</li>
+                                <li>网站性能优化技巧</li>
+                            </ul>
+                            <p>通过这个技能，我能够将自己的作品快速部署到互联网上，与他人分享。</p>
+                        `;
+                        break;
+                    case 'django':
+                        title = 'Python进阶学习';
+                        content = `
+                            <p>在2025年10月，我深入学习了Django框架和Web开发。</p>
+                            <p>学习内容包括：</p>
+                            <ul>
+                                <li>Django框架的核心概念</li>
+                                <li>模型-视图-模板（MVT）架构</li>
+                                <li>数据库设计与ORM使用</li>
+                                <li>用户认证和权限管理</li>
+                                <li>REST API开发</li>
+                            </ul>
+                            <p>通过这个阶段的学习，我能够开发功能完整的Web应用程序。</p>
+                        `;
+                        break;
+                    case 'css':
+                        title = 'HTML/CSS精通';
+                        content = `
+                            <p>在2025年9月，我掌握了响应式网页设计和现代CSS技术。</p>
+                            <p>这个阶段我学会了：</p>
+                            <ul>
+                                <li>Flexbox和Grid布局</li>
+                                <li>CSS动画和过渡效果</li>
+                                <li>媒体查询和响应式设计</li>
+                                <li>Sass预处理器</li>
+                                <li>CSS架构和最佳实践</li>
+                            </ul>
+                            <p>这些技能使我能够创建美观且功能完善的网站，适应各种设备屏幕。</p>
+                        `;
+                        break;
+                    case 'python-basic':
+                        title = 'Python基础';
+                        content = `
+                            <p>在2025年8月，我完成了Python编程基础学习。</p>
+                            <p>这个阶段我掌握了：</p>
+                            <ul>
+                                <li>Python基本语法和数据类型</li>
+                                <li>函数和模块的使用</li>
+                                <li>面向对象编程概念</li>
+                                <li>错误和异常处理</li>
+                                <li>常用标准库的使用</li>
+                            </ul>
+                            <p>这为我后续的Web开发和数据分析学习打下了坚实基础。</p>
+                        `;
+                        break;
+                }
+                
+                if (title && content) {
+                    openModal(title, content);
+                }
+            });
+        });
+        
+        // 分享与交流项目点击事件
+        document.querySelectorAll('.hobby-item[data-share]').forEach(item => {
+            item.addEventListener('click', () => {
+                const share = item.getAttribute('data-share');
+                let title = '';
+                let content = '';
+                
+                switch(share) {
+                    case 'notes':
+                        title = '学习笔记';
+                        content = `
+                            <p>我习惯记录编程学习中的心得与技巧，这些笔记包括：</p>
+                            <ul>
+                                <li>Python编程技巧和最佳实践</li>
+                                <li>Web开发中的常见问题和解决方案</li>
+                                <li>算法和数据结构的学习笔记</li>
+                                <li>工具和框架的使用教程</li>
+                            </ul>
+                            <p>我计划将这些笔记整理成博客文章，与更多人分享。</p>
+                        `;
+                        break;
+                    case 'projects':
+                        title = '作品展示';
+                        content = `
+                            <p>这里展示我的编程项目和音乐作品：</p>
+                            <h3>编程项目</h3>
+                            <ul>
+                                <li>个人网站 - 展示个人技能和作品</li>
+                                <li>Python自动化工具 - 提高工作效率的脚本</li>
+                                <li>数据分析项目 - 使用Python分析数据并生成图表</li>
+                            </ul>
+                            <h3>音乐作品</h3>
+                            <ul>
+                                <li>原创歌词创作</li>
+                                <li>翻唱歌曲录制</li>
+                                <li>简单的吉他弹奏视频</li>
+                            </ul>
+                        `;
+                        break;
+                    case 'experience':
+                        title = '经验交流';
+                        content = `
+                            <p>我乐于讨论职业发展和技能提升，以下是我感兴趣的话题：</p>
+                            <ul>
+                                <li>编程学习路径和方法</li>
+                                <li>职业转型和经验分享</li>
+                                <li>技术趋势和行业动态</li>
+                                <li>个人项目管理和团队协作</li>
+                            </ul>
+                            <p>如果您对这些话题感兴趣，欢迎与我交流！</p>
+                        `;
+                        break;
+                }
+                
+                openModal(title, content);
+            });
+        });
+        
+        // 项目展示点击事件
+        document.querySelectorAll('.hobby-item[data-project-item]').forEach(item => {
+            item.addEventListener('click', () => {
+                const projectItem = item.getAttribute('data-project-item');
+                let title = '';
+                let content = '';
+                
+                switch(projectItem) {
+                    case 'website':
+                        title = '个人网站项目';
+                        content = `
+                            <p>这是我使用HTML/CSS/JavaScript创建的响应式网站。</p>
+                            <p>项目特点：</p>
+                            <ul>
+                                <li>完全响应式设计，适配各种设备</li>
+                                <li>使用现代CSS技术，如Flexbox和Grid</li>
+                                <li>交互式元素和动画效果</li>
+                                <li>通过GitHub Pages部署</li>
+                            </ul>
+                            <p>这个项目展示了我前端开发的能力和对用户体验的关注。</p>
+                        `;
+                        break;
+                    case 'automation':
+                        title = 'Python自动化工具';
+                        content = `
+                            <p>我开发了一些提高工作效率的Python脚本。</p>
+                            <p>这些工具包括：</p>
+                            <ul>
+                                <li>文件批量重命名和整理工具</li>
+                                <li>数据提取和格式转换脚本</li>
+                                <li>网页内容自动抓取程序</li>
+                                <li>报告自动生成工具</li>
+                            </ul>
+                            <p>这些工具帮助我节省了大量重复性工作的时间。</p>
+                        `;
+                        break;
+                    case 'data':
+                        title = '数据分析项目';
+                        content = `
+                            <p>我使用Python进行数据收集与分析。</p>
+                            <p>项目内容：</p>
+                            <ul>
+                                <li>使用Pandas进行数据清洗和处理</li>
+                                <li>使用Matplotlib和Seaborn创建可视化图表</li>
+                                <li>从公开API获取数据</li>
+                                <li>生成数据报告和洞察</li>
+                            </ul>
+                            <p>通过这些项目，我掌握了数据处理和分析的基本技能。</p>
+                        `;
+                        break;
+                    case 'mobile':
+                        title = '移动端适配';
+                        content = `
+                            <p>我优化网站以适应各种设备屏幕。</p>
+                            <p>优化措施包括：</p>
+                            <ul>
+                                <li>使用媒体查询实现响应式布局</li>
+                                <li>优化触摸交互体验</li>
+                                <li>调整字体大小和按钮尺寸</li>
+                                <li>测试不同设备和浏览器的兼容性</li>
+                            </ul>
+                            <p>通过这些优化，确保网站在手机和平板上也有良好的用户体验。</p>
+                        `;
+                        break;
+                }
+                
+                openModal(title, content);
+            });
+        });
+        
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', () => {
+            // 时间线动画
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-20px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 300 * index);
+            });
+            
+            // 卡片动画
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        });
+    </script>
 </body>
 </html>
